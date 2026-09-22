@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tonalamatl</title>
+<meta name="description" content="La cuenta de los días del México antiguo, viva y en el teléfono. El Tonal de hoy, su trecena, su veintena y su año.">
+
+<meta property="og:title" content="Tonalamatl">
+<meta property="og:description" content="La cuenta de los días del México antiguo, viva y en el teléfono.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tonalamatl.app">
+<meta name="theme-color" content="#1d1a16">
+
+<!--
+  ⚠️ TRES REGLAS QUE ESTA PÁGINA CUMPLE, Y POR QUÉ
+
+  §8  El maestro no se nombra. Ni aquí. La regla dice «dentro de la app», pero
+      nombrarlo en público antes de que el consejo de wewes revise el texto de
+      procedencia sería adelantarse a algo que no nos toca (0010).
+
+  §6  Y por eso mismo **no se inventa la procedencia**. Él se comprometió a dar
+      ese texto después de revisarlo con el consejo. Hasta entonces la página
+      dice lo poco que se puede decir, y se calla el resto.
+
+      ⚠️ AQUÍ HABÍA UNA NOTA QUE DECÍA QUE EL TEXTO ESTABA EN REVISIÓN CON EL
+      CONSEJO. La quité porque estaba mal por dos razones:
+
+      1. Apliqué el §6 —«un hueco visible vale más que un relleno invisible»—
+         a una página de producto. Ese principio es sobre el CONTENIDO de la
+         app: no fabricar doctrina. Una página pública no tiene que declarar
+         sus pendientes internos; simplemente dice menos.
+
+      2. Y lo grave: **publicaba el estado de un proceso que no es nuestro**.
+         Que el consejo esté revisando, y que todavía no haya resuelto, es
+         asunto del maestro y de ellos. Decirlo en público se adelanta a algo
+         que no nos toca — justo lo que la 0010 evita.
+
+      Los pendientes internos van en PENDIENTES.md, no en la vitrina.
+
+  §4  No se instruye a nadie ni se promete nada que no exista. No hay fecha de
+      lanzamiento inventada, no hay «descárgala ya», no hay lista de correo que
+      nadie esté leyendo.
+
+  El texto de esta página pasa por el mismo linter que el corpus:
+      node --experimental-strip-types sitio/revisar.mjs
+-->
+
+<style>
+:root{
+  --papel:#fbf9f5; --tinta:#1d1a16; --tenue:#6f675c; --linea:#e3ddd2;
+  --oscuro:#16130f; --oro:#b8912f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);
+  font:17px/1.62 ui-serif,Georgia,"Times New Roman",serif;
+  -webkit-font-smoothing:antialiased}
+main{max-width:34rem;margin:0 auto;padding:0 1.4rem}
+
+.hero{background:var(--oscuro);color:#f4efe6;padding:4.5rem 1.4rem 4rem;text-align:center}
+.hero h1{font-size:2.4rem;margin:0 0 .2rem;letter-spacing:.06em;font-weight:500}
+.hero .sub{color:#a89e8f;font-size:.95rem;letter-spacing:.12em;
+  text-transform:uppercase;margin:0 0 2.2rem}
+.hoy{max-width:22rem;margin:0 auto;border:1px solid #322c23;border-radius:4px;
+  padding:1.3rem 1.2rem}
+.hoy .et{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:#8d8477;margin-bottom:.5rem}
+.hoy .tonal{font-size:1.7rem;line-height:1.2;color:#f4efe6}
+.hoy .bajo{color:#a89e8f;font-size:.92rem;margin-top:.35rem}
+.hoy .anio{color:var(--oro);font-size:.82rem;letter-spacing:.06em;margin-top:.9rem;
+  padding-top:.75rem;border-top:1px solid #322c23}
+
+section{padding:3rem 0;border-bottom:1px solid var(--linea)}
+section:last-of-type{border-bottom:0}
+h2{font-size:1.15rem;margin:0 0 .9rem;font-weight:600}
+p{margin:0 0 1rem}
+.tenue{color:var(--tenue)}
+.grande{font-size:1.22rem;line-height:1.5}
+
+ul.piezas{list-style:none;padding:0;margin:1.2rem 0 0}
+ul.piezas li{padding:.7rem 0;border-top:1px solid var(--linea);display:flex;gap:1rem}
+ul.piezas b{flex:0 0 8.5rem;font-weight:600}
+ul.piezas span{color:var(--tenue);font-size:.94rem}
+
+.nota{background:#f3eee4;border-left:3px solid var(--oro);
+  padding:1rem 1.1rem;margin:1.6rem 0;font-size:.95rem}
+.nota b{display:block;margin-bottom:.3rem}
+
+footer{padding:2.5rem 1.4rem 3.5rem;text-align:center;color:var(--tenue);
+  font-size:.85rem;background:#f4efe6}
+footer a{color:var(--tenue)}
+@media (max-width:480px){
+  .hero h1{font-size:1.9rem}
+  ul.piezas li{flex-direction:column;gap:.15rem}
+  ul.piezas b{flex:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Tonalamatl</h1>
+  <p class="sub">La cuenta de los días</p>
+
+  <!-- El día se calcula aquí mismo, con los dos parámetros del motor. No es
+       adorno: es la prueba de que la cuenta corre, y es lo único de la
+       enseñanza que esta página muestra — un nombre de día, sin su lectura. -->
+  <div class="hoy">
+    <div class="et">Hoy</div>
+    <div class="tonal" id="tonal">—</div>
+    <div class="bajo" id="bajo"></div>
+    <div class="anio" id="anio"></div>
+  </div>
+</header>
+
+<main>
+
+<section>
+  <p class="grande">Cada día del México antiguo tenía nombre, y ese nombre decía
+  algo sobre el terreno en el que estabas parado ese día.</p>
+  <p>Esa cuenta nunca se detuvo. Se sigue llevando, se sigue enseñando, y
+  todavía se puede saber qué día es hoy en ella.</p>
+  <p class="tenue">Tonalamatl es una aplicación para el teléfono que la lleva al
+  día de hoy: el día con su numeral y su signo, la trecena en la que cae, la
+  veintena del año, y qué aporta cada una de esas piezas.</p>
+</section>
+
+<section>
+  <h2>Lo que muestra un día</h2>
+  <ul class="piezas">
+    <li><b>El Tonal</b><span>el numeral y el signo de la cuenta de adentro, que no se detiene nunca</span></li>
+    <li><b>El Xiuhtonal</b><span>el mismo día visto desde la cuenta del año, que sí se detiene</span></li>
+    <li><b>La trecena</b><span>los trece días en los que cae, y el oficio de esos trece</span></li>
+    <li><b>La veintena</b><span>la temporada del año, y en qué día de veinte vamos</span></li>
+    <li><b>Los regentes</b><span>el del día, el de la noche, y qué aporta cada uno</span></li>
+    <li><b>El año</b><span>su cargador, y qué le hace al año entero</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2>De dónde viene</h2>
+  <p>De una tradición oral viva. No de una reconstrucción académica ni de una
+  traducción de segunda mano.</p>
+
+  <p class="tenue">Hay otras cuentas, llevadas por investigadores, que abren el
+  año en otra fecha. La aplicación las incluye: quien lleve una de ellas puede
+  escogerla y ver su día.</p>
+</section>
+
+<section>
+  <h2>Cuándo</h2>
+  <p>Se está construyendo. No hay fecha todavía, y no va a haber una inventada
+  aquí.</p>
+  <p class="tenue">Lo que sí hay es la cuenta corriendo: el día de arriba sale
+  del mismo cálculo que va a llevar la aplicación.</p>
+</section>
+
+</main>
+
+<footer>
+  <p>Tonalamatl</p>
+  <p><a href="mailto:hola@tonalamatl.app">hola@tonalamatl.app</a></p>
+</footer>
+
+<script>
+/* ═══ EL MOTOR, EN LO MÍNIMO ═══
+ *
+ * Dos parámetros y cero excepciones, igual que el motor de verdad:
+ *
+ *   ANCLA    15 de marzo de 2026, 06:45 — la hora del reloj
+ *   AÑO      365.25 días
+ *
+ * La apertura recorre seis horas cada año y vuelve cada cuatro. El último día
+ * del año dura treinta horas: ahí se absorbe el cuarto de día.
+ *
+ * ⚠️ Esto es una COPIA REDUCIDA, y es la única del proyecto que se permite.
+ * La ADR 0008 dice que hay un solo motor y vive en el servidor; aquí no hay
+ * servidor, y pedirle a una página estática que llame a una API para pintar un
+ * nombre de día sería montar infraestructura para un adorno.
+ *
+ * Lo que sí respeta: **sólo el nombre del día**. Ni esencias, ni regentes, ni
+ * interpretación. El nombre de un día no es la enseñanza (0008), la lectura sí.
+ */
+(function () {
+  var TONALLI = ["Tzipahtli","Ehekatl","Kalli","Kuehtzpallin","Kowatl","Mikitztli",
+    "Matzatl","Toxtli","Atl","Itzkuintli","Otzohmahtli","Mallinalli","Akatl",
+    "Yowalmitzi","Kwauhtli","Kotzkakwauhtli","Ollin","Tekpatl","Kiawitl","Xoxitl"];
+  var VEINTENAS = ["Atlakawalo","Tlakaxipewaliztli","Tozoztontli","Weytozoztli",
+    "Toxkatl","Etzakualiztli","Tekuilwitontli","Weytekuilwitl","Tlaxoximako",
+    "Xokowetzin","Oxpanixtli","Teotleko","Tepeilwitl","Kexolli","Pankezaliztli",
+    "Atemoxtli","Tititl","Itzkalli"];
+  var CARG_ACT = ["Atl","Yowalmitzi","Kiawitl","Kuehtzpallin"];
+  var CARG_ANT = ["Toxtli","Akatl","Tekpatl","Kalli"];
+
+  var D1 = 86400000;
+  var ANIO = 365.25 * D1;
+  var T0 = new Date(2026, 2, 15, 6, 45, 0).getTime();
+  var mod = function (a, n) { return ((a % n) + n) % n };
+
+  var ms = Date.now();
+  var k = Math.floor((ms - T0) / ANIO);
+  var ap = function (j) { return T0 + j * ANIO };
+  while (ap(k) > ms) k--;
+  while (ap(k + 1) <= ms) k++;
+
+  /* Clamp a 364: el último día del año dura treinta horas. */
+  var n = Math.max(0, Math.min(364, Math.floor((ms - ap(k)) / D1)));
+
+  /* ⚠️ `abs` se cuenta en APERTURAS de día, no en milisegundos entre dos
+     instantes: 365 × k + n.
+   *
+   * Aquí tenía `Math.floor((ms - T0) / D1)`, que parece lo mismo y no lo es.
+   * El año dura 365.25 días pero tiene 365 aperturas —el cuarto de día se lo
+   * come el último, que dura treinta horas—, así que la división cruda se
+   * corre un día por cada año que pasa. Lo habría publicado: el 15 de marzo de
+   * 2027 la página decía 2 Mikitztli donde el motor dice 1 Kowatl. */
+  var abs = 365 * k + n;
+  var t = mod(abs, 260);
+  var kk = mod(k, 52);
+  var anio = (mod(kk, 13) + 1) + ' ' + (k >= 0 ? CARG_ACT : CARG_ANT)[mod(kk, 4)];
+
+  var pon = function (id, txt) {
+    var e = document.getElementById(id);
+    if (e) e.textContent = txt;
+  };
+
+  pon('tonal', (mod(t, 13) + 1) + ' ' + TONALLI[mod(t, 20)]);
+  pon('bajo', n >= 360
+    ? 'Nemontemi · día ' + (n - 359) + ' de 5'
+    : VEINTENAS[Math.floor(n / 20)] + ' · día ' + (mod(n, 20) + 1) + ' de 20');
+  pon('anio', 'Año ' + anio);
+})();
+</script>
+</body>
+</html>
