@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Borrar tu cuenta · Tonalamatl</title>
+<meta name="description" content="Cómo borrar tu cuenta de Tonalamatl y qué pasa con tus datos.">
+<meta name="robots" content="index">
+<meta name="theme-color" content="#1d1a16">
+
+<!--
+  ⚠️ ESTA PÁGINA EXISTE PORQUE GOOGLE PLAY LA EXIGE.
+
+  Su política de datos pide una URL pública, enlazada desde la ficha de la
+  tienda, donde alguien pueda pedir el borrado de su cuenta **sin tener la app
+  instalada**. Quien cambió de teléfono o ya la desinstaló no puede entrar a
+  Ajustes, y sin esta página no tendría por dónde.
+
+  No sustituye al borrado dentro de la app —ése lo exige Apple 5.1.1(v) y ya
+  existe—: lo acompaña. Ver docs/decisiones/0035.
+
+  ⚠️ §8 · el maestro no se nombra aquí tampoco. Misma razón que en la portada.
+-->
+
+<style>
+  :root{--obs:#1d1a16;--papel:#fbf8f3;--oro:#8a6420;--oroluz:#d9a227;
+        --tenue:#6b6052;--linea:#e2d9ca;--realce:#fdf6e6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--papel);color:#17130f;
+       font:16px/1.6 Georgia,'Noto Serif',serif;padding:0 16px}
+  header{background:var(--obs);color:#e8ded0;margin:0 -16px 0;padding:22px 16px;text-align:center}
+  header a{color:#a89c8a;text-decoration:none;font-size:14px}
+  main{max-width:38rem;margin:0 auto;padding:28px 0 60px}
+  h1{font-size:26px;font-weight:400;margin:0 0 6px}
+  h2{font-size:19px;font-weight:400;margin:34px 0 10px;color:var(--oro)}
+  .aviso{background:var(--realce);border:1px solid var(--linea);
+         border-radius:14px;padding:16px 18px;margin:22px 0}
+  .pasos{padding-left:20px}
+  .pasos li{margin:8px 0}
+  code{background:var(--realce);border:1px solid var(--linea);
+       border-radius:5px;padding:1px 6px;font-size:14px}
+  footer{border-top:1px solid var(--linea);margin-top:44px;padding-top:18px;
+         color:var(--tenue);font-size:14px}
+  a{color:var(--oro)}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/">Tonalamatl</a>
+</header>
+
+<main>
+  <h1>Borrar tu cuenta</h1>
+  <p style="color:var(--tenue);margin-top:0">Qué se borra, qué se queda, y cómo pedirlo.</p>
+
+  <h2>Desde la app · es lo más rápido</h2>
+  <ol class="pasos">
+    <li>Abre Tonalamatl.</li>
+    <li>Toca el engranaje, arriba a la derecha.</li>
+    <li><strong>Tu cuenta</strong> → <strong>Borrar mi cuenta</strong>.</li>
+    <li>Confirma. No se deshace.</li>
+  </ol>
+
+  <div class="aviso">
+    <strong>Borrar tu cuenta no cancela tu suscripción.</strong>
+    Ni nosotros ni ninguna app podemos cancelar un cobro de Google Play o de la
+    App Store: eso se hace en los ajustes de tu teléfono, en la tienda donde la
+    contrataste. Cancélala <em>antes</em> de borrar tu cuenta.
+  </div>
+
+  <h2>Si ya no tienes la app</h2>
+  <p>
+    Escríbenos a apps@tonalamatl.app desde el correo con el que entraste a la app y
+    pídenos el borrado. Te confirmamos cuando esté hecho.
+  </p>
+
+  <h2>Qué se borra</h2>
+  <ul>
+    <li>Tu cuenta y tu forma de entrar.</li>
+    <li>Tu fecha de nacimiento y tu lectura natal.</li>
+    <li>La gente que guardaste.</li>
+    <li>Tu plan y los días que te quedaban.</li>
+  </ul>
+
+  <h2>Qué se queda, y por qué</h2>
+  <p>
+    El registro contable de los pagos: cuánto, cuándo y por qué medio. La ley
+    fiscal obliga a conservarlo, y no podemos borrarlo aunque queramos.
+  </p>
+  <p>
+    Lo que sí hacemos es <strong>quitarle todo lo que apunta a ti</strong> —tu
+    correo, tu ciudad, quién te invitó— de modo que quede el hecho contable y
+    no la persona.
+  </p>
+
+  <h2>Cuánto tarda</h2>
+  <p>
+    Desde la app es inmediato. Por correo, hasta 30 días naturales, que es el
+    plazo del aviso de privacidad.
+  </p>
+
+  <footer>
+    <!-- ⚠️ SIN ENLACE AL AVISO DE PRIVACIDAD, todavía. El aviso existe en
+         `docs/aviso-de-privacidad.md` y **no se puede publicar**: le faltan la
+         razón social, el domicilio y la fecha, que son datos de Memo. Un
+         enlace a una página que no existe, en la página que Google revisa, es
+         peor que no enlazarla. Se pone en cuanto el aviso salga. -->
+    Escríbenos a <a href="mailto:apps@tonalamatl.app">apps@tonalamatl.app</a>
+    · <a href="/">Tonalamatl</a>
+  </footer>
+</main>
+
+</body>
+</html>
