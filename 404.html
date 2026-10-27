@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tonalamatl</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#151510">
+<!--
+  26-oct (0047) · LA PÁGINA DEL ENLACE DE INVITACIÓN, Y LA 404.
+
+  GitHub Pages no reescribe rutas: `tonalamatl.app/i/K7Q2X9` no es un archivo,
+  así que Pages entrega esta página. Si la ruta es `/i/<código>`, se arma la
+  invitación; si no, dice que la página no existe.
+
+  Con la app instalada, el enlace no llega aquí: lo abre la app (Universal
+  Links en iPhone, App Links en Android, por `.well-known/`). Aquí llega quien
+  todavía no la tiene:
+    · Android · un botón a Google Play con el código en `referrer`: al abrir
+      la app por primera vez, la librería Install Referrer lo devuelve.
+    · iPhone · Apple no guarda nada al instalar. Dos pasos: instalar, y volver
+      a tocar el enlace. «Ya la instalé: abrir» abre la app por su esquema
+      (`app.tonalamatl.ce://i/<código>`), porque un enlace al mismo dominio
+      desde Safari no abre la app.
+
+  Sin rastreadores, como el resto del sitio. Las rutas van desde la raíz
+  (`/assets/…`): esta página se sirve en cualquier ruta.
+
+  ⚠️ §8 · el maestro no se nombra aquí tampoco.
+-->
+<style>
+:root{--night:#151510;--paper:#f8f5ed;--ink:#24271f;--muted:#69695b;--gold:#dbc078;--gold-dark:#806126;--line:#dedbce;--serif:Georgia,'Times New Roman',serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+header{background:var(--night);color:var(--paper);padding:18px 16px}
+.brand{display:flex;align-items:center;gap:12px;font:22px var(--serif);text-decoration:none;color:inherit;max-width:34rem;margin:auto}
+.brand img{width:40px;height:40px;border-radius:10px}
+main{max-width:34rem;margin:auto;padding:36px 16px 64px}
+h1{font:400 clamp(32px,8vw,42px)/1.1 var(--serif);letter-spacing:-.03em;margin:0 0 14px}
+p{margin:0}
+.lead{color:#443c33;font-size:17px}
+ol{list-style:none;padding:0;margin:30px 0 0;display:grid;gap:14px}
+li{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff}
+.num{width:34px;height:34px;border-radius:50%;background:var(--night);color:var(--gold);display:grid;place-items:center;font:15px var(--serif)}
+li h2{font:400 21px/1.25 var(--serif);margin:3px 0 6px}
+li p{color:var(--muted);font-size:15px}
+.button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 20px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600;margin-top:14px;border:1px solid var(--night)}
+.button.solid{background:var(--night);color:var(--paper)!important}
+.button.light{background:transparent;color:var(--night)}
+.codigo{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:14px}
+.codigo strong{display:block;font:26px/1.3 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.16em;color:var(--ink);margin-top:4px}
+a{color:var(--gold-dark)}
+.button.solid,.button.light{color:inherit}
+[hidden]{display:none!important}
+</style>
+<link rel="icon" type="image/png" href="/assets/icono.png">
+</head>
+<body>
+<header><a class="brand" href="/"><img src="/assets/icono.png" width="40" height="40" alt="">Tonalamatl</a></header>
+
+<main id="no-existe">
+  <h1 data-es="Esta página no existe." data-en="This page doesn’t exist.">Esta página no existe.</h1>
+  <p class="lead"><a href="/" data-es="Ir a la portada de Tonalamatl" data-en="Go to the Tonalamatl home page">Ir a la portada de Tonalamatl</a></p>
+</main>
+
+<main id="invitacion" hidden>
+  <h1 data-es="Te invitaron a Tonalamatl" data-en="You’ve been invited to Tonalamatl">Te invitaron a Tonalamatl</h1>
+  <p class="lead" data-es="Una veintena, 20 días, para conocer la cuenta ancestral con todos los textos."
+     data-en="You get a veintena (twenty days) to explore Mexico’s ancestral calendar with every reading unlocked.">Una veintena, 20 días, para conocer la cuenta ancestral con todos los textos.</p>
+  <ol>
+    <li><span class="num">1</span><div>
+      <h2 data-es="Instala la app" data-en="Install the app">Instala la app</h2>
+      <a class="button solid" id="ir-iphone" hidden data-es="Ir a la App Store" data-en="Go to the App Store">Ir a la App Store</a>
+      <a class="button solid" id="ir-android" hidden data-es="Ir a Google Play" data-en="Go to Google Play">Ir a Google Play</a>
+    </div></li>
+    <li id="paso-dos" hidden><span class="num">2</span><div>
+      <h2 data-es="Vuelve a este enlace" data-en="Come back to this link">Vuelve a este enlace</h2>
+      <p data-es="Después de instalarla, vuelve a tocar el enlace para abrir la app con tu invitación."
+         data-en="Once the app is installed, tap the link again to open it with your invite.">Después de instalarla, vuelve a tocar el enlace para abrir la app con tu invitación.</p>
+      <a class="button light" id="abrir" data-es="Ya la instalé: abrir" data-en="Open the app">Ya la instalé: abrir</a>
+    </div></li>
+  </ol>
+  <p class="codigo"><span data-es="Tu invitación" data-en="Your invite">Tu invitación</span><strong id="codigo"></strong></p>
+</main>
+
+<script>
+(function () {
+  /* Las tiendas. La de Apple es la ficha de la app (App Store Connect,
+     Apple ID 6820837889, 26-oct). */
+  var APP_STORE = 'https://apps.apple.com/app/id6820837889';
+  var PLAY = 'https://play.google.com/store/apps/details?id=app.tonalamatl.ce';
+  var ALFABETO = /^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{6}$/;
+
+  var en = !/^es\b/i.test(navigator.language || 'es');
+  document.documentElement.lang = en ? 'en' : 'es';
+  var textos = document.querySelectorAll('[data-es]');
+  for (var i = 0; i < textos.length; i++) textos[i].textContent = textos[i].getAttribute(en ? 'data-en' : 'data-es');
+
+  var m = /^\/i\/([^\/?#]+)\/?$/.exec(location.pathname);
+  var codigo = m ? decodeURIComponent(m[1]).toUpperCase().replace(/[\s-]/g, '') : '';
+  if (!ALFABETO.test(codigo)) return;
+
+  document.title = en ? 'You’ve been invited to Tonalamatl' : 'Te invitaron a Tonalamatl';
+  document.getElementById('no-existe').hidden = true;
+  document.getElementById('invitacion').hidden = false;
+  document.getElementById('codigo').textContent = codigo;
+
+  var ua = navigator.userAgent || '';
+  var iphone = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var android = /Android/.test(ua);
+  var correo = 'mailto:apps@tonalamatl.app?subject=' + encodeURIComponent('Tonalamatl iPhone · ' + codigo);
+
+  var aIphone = document.getElementById('ir-iphone');
+  var aAndroid = document.getElementById('ir-android');
+  aIphone.href = APP_STORE || correo;
+  /* El código viaja a Play en `referrer`, y la app lo lee al abrir. */
+  aAndroid.href = PLAY + '&referrer=' + encodeURIComponent('c=' + codigo);
+  document.getElementById('abrir').href = 'app.tonalamatl.ce://i/' + codigo;
+
+  if (android) { aAndroid.hidden = false; }
+  else if (iphone) { aIphone.hidden = false; document.getElementById('paso-dos').hidden = false; }
+  else { aIphone.hidden = false; aAndroid.hidden = false; }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["L3KX7Q9529.app.tonalamatl.ce"],
+        "components": [{ "/": "/i/*", "comment": "La invitación (0047): tonalamatl.app/i/<código>" }]
+      }
+    ]
+  }
+}

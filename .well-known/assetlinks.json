@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.tonalamatl.ce",
+      "sha256_cert_fingerprints": ["C0:11:06:DA:35:EB:57:68:77:4F:18:6A:7D:17:CD:3F:D0:E5:FB:DC:F0:63:23:8E:90:01:39:C9:93:EF:46:D4"]
+    }
+  }
+]
