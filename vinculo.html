@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 4-nov-2026 (0054) · La lectura de vínculo que alguien compartió.
+     · El token va después de «#»: el navegador no se lo manda a este sitio,
+       sólo esta página a la API, y la API no lo anota.
+     · Sin buscadores, sin rastreadores, sin cookies. La visita no se mide aquí:
+       la API cuenta que se abrió, sin saber quién.
+     · Todo lo que llega se pinta como texto (`textContent`), nunca como HTML.
+     · `tonalamatl-api` lo pone `make sitio-vinculo-api` con la URL de prod. -->
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="tonalamatl-api" content="https://62a2rppez2.execute-api.us-east-1.amazonaws.com">
+<title>Tonalamatl · Vínculos</title>
+<style>
+  :root {
+    --tinta: #17130F; --papel: #FBF8F3; --papel2: #F2ECE2; --linea: #E2D9CA;
+    --oro: #8A6420; --oroLuz: #D9A227; --tenue: #6B6052; --texto2: #443C33;
+    --obs: #1B1713; --obs2: #2A231C; --sobreObs: #E8DED0; --sobreObsTenue: #A89C8A;
+    --rojo: #944C3A;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--papel); color: var(--tinta); }
+  body { font-family: Georgia, 'Times New Roman', serif; -webkit-text-size-adjust: 100%; }
+  .barra { background: var(--obs); color: var(--sobreObs); text-align: center; padding: 16px; font-size: 21px; }
+  main { max-width: 560px; margin: 0 auto; padding: 26px 18px 40px; }
+  .ceja { font: 700 10.5px/1.2 Helvetica, Arial, sans-serif; letter-spacing: 1.35px; color: var(--oro); text-transform: uppercase; }
+  h1 { font-weight: 400; font-size: 34px; line-height: 1.1; letter-spacing: -.7px; margin: 8px 0 20px; overflow-wrap: anywhere; }
+  .panel { border-radius: 16px; padding: 17px; background: var(--papel2); border: 1px solid var(--linea); }
+  .oscuro { background: var(--obs2); border-color: var(--obs2); color: var(--sobreObs); }
+  .oscuro .pregunta { font: 12px/1.3 Helvetica, Arial, sans-serif; color: var(--sobreObsTenue); margin: 0 0 12px; }
+  .conclusion { font-size: 22px; line-height: 1.35; margin: 0; }
+  .oscuro .conclusion, .oscuro .compartido { color: var(--sobreObs); }
+  .compartido { font-size: 15px; line-height: 1.5; margin: 13px 0 0; }
+  h2 { font-weight: 400; font-size: 23px; line-height: 1.22; margin: 26px 0 14px; }
+  h2.rojo { color: var(--rojo); }
+  p { font-size: 15.5px; line-height: 1.5; color: var(--texto2); margin: 0; }
+  .aporte { display: flex; gap: 12px; margin: 3px 0 18px; }
+  .inicial { flex: 0 0 40px; height: 40px; border-radius: 50%; background: var(--papel2); color: var(--oro);
+    display: flex; align-items: center; justify-content: center; font-size: 22px; }
+  .aporte h3 { font-weight: 400; font-size: 21px; margin: 0; }
+  .aporte p { margin-top: 7px; }
+  hr { border: 0; border-top: 1px solid var(--linea); margin: 8px 0 0; }
+  .situacion { font: 12px/1.3 Helvetica, Arial, sans-serif; color: var(--tenue); margin: 0 0 12px; }
+  .ayuda { margin-top: 27px; }
+  .ayuda h2 { margin: 0 0 12px; }
+  .efecto { font: 13px/1.5 Helvetica, Arial, sans-serif; color: var(--tenue); margin-top: 11px; }
+  .nota { font: 10.5px/1.5 Helvetica, Arial, sans-serif; color: var(--tenue); text-align: center; margin: 22px 0 0; }
+  .crea { margin-top: 30px; text-align: center; }
+  .crea h2 { margin: 0 0 8px; }
+  .boton { display: inline-block; margin-top: 16px; background: var(--obs); color: var(--sobreObs); text-decoration: none;
+    font: 15px/1 Helvetica, Arial, sans-serif; padding: 15px 22px; border-radius: 26px; }
+  .aviso { text-align: center; padding: 60px 0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="barra">Tonalamatl</div>
+<main>
+  <div id="cargando" class="aviso"><p id="txt-cargando"></p></div>
+  <div id="noHay" class="aviso" hidden><p id="txt-nohay"></p></div>
+  <div id="falla" class="aviso" hidden><p id="txt-falla"></p></div>
+  <article id="lectura" hidden>
+    <div class="ceja" id="ceja"></div>
+    <h1 id="nombres"></h1>
+    <section class="panel oscuro">
+      <p class="pregunta" id="titulo"></p>
+      <p class="conclusion" id="conclusion"></p>
+      <p class="compartido" id="compartido" hidden></p>
+    </section>
+    <h2 id="h-aportes"></h2>
+    <div id="aportes"></div>
+    <div id="choques" hidden>
+      <hr>
+      <h2 class="rojo" id="h-choques"></h2>
+      <div id="situaciones"></div>
+      <section class="panel ayuda">
+        <h2 id="h-ayuda"></h2>
+        <div id="acuerdos"></div>
+      </section>
+    </div>
+    <p class="nota" id="nota"></p>
+    <section class="panel crea">
+      <h2 id="h-crea"></h2>
+      <p id="txt-crea"></p>
+      <a class="boton" id="crea" href="https://tonalamatl.app/"></a>
+    </section>
+  </article>
+</main>
+<script>
+(function () {
+  'use strict';
+  var T = {
+    es: {
+      ceja: 'Vínculos', cargando: 'Cargando la lectura…',
+      nohay: 'Este enlace ya no está disponible. Quien lo compartió puede haberlo desactivado.',
+      falla: 'No se pudo cargar la lectura. Inténtalo de nuevo en un momento.',
+      aportes: '¿Qué aporta cada persona?', choques: '¿Dónde podemos chocar?', ayuda: '¿Qué nos ayudaría?',
+      crea: 'Crea tu propia lectura de vínculo',
+      creaTexto: 'Las lecturas de vínculo se crean en la app de Tonalamatl para Android, con tu nacimiento y el de tu gente.',
+      creaBoton: 'Obtener Tonalamatl'
+    },
+    en: {
+      ceja: 'Connections', cargando: 'Loading the reading…',
+      nohay: 'This link is no longer available. The person who shared it may have turned it off.',
+      falla: 'The reading couldn’t be loaded. Please try again in a moment.',
+      aportes: 'What does each person bring?', choques: 'Where might we clash?', ayuda: 'What would help us?',
+      crea: 'Create your own connection reading',
+      creaTexto: 'Connection readings are created in the Tonalamatl Android app, using your birth date and those of the people you save.',
+      creaBoton: 'Get Tonalamatl'
+    }
+  };
+  var $ = function (id) { return document.getElementById(id); };
+  var pon = function (id, texto) { $(id).textContent = texto; };
+  var idioma = (navigator.language || 'es').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+  function textos(i) {
+    var t = T[i];
+    document.documentElement.lang = i;
+    pon('txt-cargando', t.cargando); pon('txt-nohay', t.nohay); pon('txt-falla', t.falla);
+    pon('ceja', t.ceja); pon('h-aportes', t.aportes); pon('h-choques', t.choques); pon('h-ayuda', t.ayuda);
+    pon('h-crea', t.crea); pon('txt-crea', t.creaTexto); pon('crea', t.creaBoton);
+  }
+  function muestra(id) {
+    ['cargando', 'noHay', 'falla', 'lectura'].forEach(function (x) { $(x).hidden = x !== id; });
+  }
+  function parrafo(texto, clase) {
+    var p = document.createElement('p');
+    if (clase) p.className = clase;
+    p.textContent = texto;
+    return p;
+  }
+  function pinta(v) {
+    var i = v.idioma === 'en' ? 'en' : 'es';
+    textos(i);
+    pon('nombres', v.personas.join(' · '));
+    document.title = 'Tonalamatl · ' + v.personas.join(' · ');
+    pon('titulo', v.titulo);
+    pon('conclusion', v.conclusion);
+    if (v.compartido) { pon('compartido', v.compartido); $('compartido').hidden = false; }
+    var ap = $('aportes');
+    if (v.aporteComun) ap.appendChild(parrafo(v.aporteComun));
+    (v.aportes || []).forEach(function (a) {
+      var fila = document.createElement('div'); fila.className = 'aporte';
+      var ini = document.createElement('div'); ini.className = 'inicial'; ini.textContent = Array.from(a.nombre)[0] || '';
+      var col = document.createElement('div');
+      var h = document.createElement('h3'); h.textContent = a.nombre; col.appendChild(h);
+      (a.parrafos || []).forEach(function (t) { col.appendChild(parrafo(t)); });
+      fila.appendChild(ini); fila.appendChild(col); ap.appendChild(fila);
+    });
+    var sit = v.situaciones || [];
+    if (sit.length) {
+      $('choques').hidden = false;
+      sit.forEach(function (s) {
+        $('situaciones').appendChild(parrafo(s.titulo, 'situacion'));
+        $('situaciones').appendChild(parrafo(s.dificultad));
+        var ac = parrafo(s.acuerdo); ac.style.marginTop = '12px';
+        $('acuerdos').appendChild(ac);
+        if (s.efecto) $('acuerdos').appendChild(parrafo(s.efecto, 'efecto'));
+      });
+    }
+    pon('nota', v.nota || '');
+    /* La invitación de quien compartió, con el origen para medir. Sin código,
+       la página de inicio. */
+    if (v.invitacion && /^[A-Z2-9]{6}$/.test(v.invitacion)) {
+      $('crea').href = 'https://tonalamatl.app/i/' + v.invitacion + '?o=vinculo';
+    }
+    muestra('lectura');
+  }
+  function api() {
+    var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    var q = new URLSearchParams(location.search).get('api');
+    if (local && q) return q.replace(/\/+$/, '');
+    return (document.querySelector('meta[name="tonalamatl-api"]').content || '').replace(/\/+$/, '');
+  }
+  textos(idioma);
+  var token = location.hash.replace(/^#/, '');
+  if (!/^[A-Za-z0-9_-]{32}$/.test(token) || !api()) { muestra('noHay'); return; }
+  fetch(api() + '/v1/vinculo/compartido/' + token, { credentials: 'omit', referrerPolicy: 'no-referrer', cache: 'no-store' })
+    .then(function (r) {
+      if (r.status === 404) { muestra('noHay'); return null; }
+      if (!r.ok) throw new Error('estado ' + r.status);
+      return r.json();
+    })
+    .then(function (v) { if (v) { if (v.disponible) pinta(v); else muestra('noHay'); } })
+    .catch(function () { muestra('falla'); });
+})();
+</script>
+</body>
+</html>
