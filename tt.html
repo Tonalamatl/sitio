@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>¿Qué signo te tocó al nacer? · Tonalamatl</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#151510">
+<!-- 15-nov-2026 · enlace de bio. 18-nov-2026 · primero el signo y luego la
+     tienda (plan de crecimiento). La lógica y el porqué, en `ir.js`. -->
+<style>
+:root{--night:#151510;--paper:#f8f5ed;--ink:#24271f;--muted:#69695b;--gold:#b0883c;--gold-dark:#806126;--line:#ddd5c4;--serif:Georgia,'Times New Roman',serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+header{background:var(--night);color:var(--paper);padding:18px 16px}
+.brand{display:flex;align-items:center;gap:12px;font:22px var(--serif);text-decoration:none;color:inherit;max-width:34rem;margin:auto}
+.brand img{width:40px;height:40px;border-radius:10px}
+main{max-width:34rem;margin:auto;padding:32px 16px 64px}
+h1{font:400 clamp(30px,8vw,40px)/1.1 var(--serif);letter-spacing:-.03em;margin:0 0 14px}
+p{margin:0;color:#443c33;font-size:17px}
+form{display:grid;gap:10px;margin-top:22px}
+label{font-size:14px;font-weight:600;color:var(--muted)}
+input[type=date]{width:100%;min-height:52px;padding:10px 14px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);font:17px var(--sans)}
+.error{color:#9b2c1f;font-size:15px}
+.button{display:flex;align-items:center;justify-content:center;min-height:52px;padding:12px 20px;border:0;border-radius:6px;text-decoration:none;font:600 15px var(--sans);background:var(--night);color:var(--paper);cursor:pointer;width:100%}
+.button.oro{background:var(--gold-dark)}
+.signo{margin-top:26px;padding:22px 18px;border:1px solid var(--line);border-radius:12px;background:#fff;text-align:center}
+.signo img{width:96px;height:96px}
+.signo .de{font-size:15px;color:var(--muted);margin-top:8px}
+.signo .nombre{font:400 34px/1.15 var(--serif);margin:4px 0 2px}
+.signo .palabras{color:var(--gold-dark);font-size:17px}
+.signo .despues{margin-top:14px;font-size:16px}
+.tiendas{display:grid;gap:12px;margin-top:18px}
+.directo{display:inline-block;margin-top:18px;color:var(--gold-dark);font-size:15px}
+.compu{margin-top:26px;font-size:15px;color:var(--muted)}
+.conocer{display:inline-block;margin-top:22px;color:var(--gold-dark)}
+[hidden]{display:none!important}
+</style>
+<link rel="icon" type="image/png" href="/assets/icono.png">
+<script src="/medida.js?v=5eefb6c406"></script>
+</head>
+<body>
+<header><a class="brand" href="/"><img src="/assets/icono.png" width="40" height="40" alt="">Tonalamatl</a></header>
+<main>
+  <h1>¿Qué signo te tocó al nacer?</h1>
+  <p>Pon tu fecha de nacimiento y te decimos tu Tonal aquí mismo.</p>
+  <form id="tu-signo" novalidate>
+    <label for="nacio">Tu fecha de nacimiento</label>
+    <input type="date" id="nacio" name="nacio" min="1900-01-01" required>
+    <p class="error" id="nacio-error" hidden>Pon una fecha de 1900 a hoy.</p>
+    <button class="button oro" type="submit">Ver mi signo</button>
+  </form>
+  <section class="signo" id="signo" hidden aria-live="polite">
+    <img id="signo-glifo" src="/assets/icono.png" width="96" height="96" alt="">
+    <p class="de">Naciste en un día</p>
+    <p class="nombre" id="signo-nombre"></p>
+    <p class="palabras" id="signo-palabras"></p>
+    <p class="despues">En la app está lo que trae tu signo, tu Xiuhtonal y cómo te llevas con tu gente.</p>
+  </section>
+  <div class="tiendas" id="tiendas">
+    <a class="button" id="ir-iphone" href="https://apps.apple.com/app/id6820837889">Descargar en el App Store</a>
+    <a class="button" id="ir-android" href="https://play.google.com/store/apps/details?id=app.tonalamatl.ce">Descargar en Google Play</a>
+  </div>
+  <p class="compu" id="en-compu">En la computadora: abre este enlace en tu teléfono, o entra a tu tienda desde aquí.</p>
+  <a class="conocer" href="/">Conocer Tonalamatl</a>
+</main>
+<script src="/cuenta.js?v=1bed79aea4"></script>
+<script src="/ir.js?v=4d9eb660f3" data-red="tt" data-idioma="es"></script>
+</body>
+</html>

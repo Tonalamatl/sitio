@@ -1,0 +1,16 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.tonalamatl.ce",
+      "sha256_cert_fingerprints": [
+        "C0:11:06:DA:35:EB:57:68:77:4F:18:6A:7D:17:CD:3F:D0:E5:FB:DC:F0:63:23:8E:90:01:39:C9:93:EF:46:D4",
+        "75:82:73:93:60:37:9D:24:35:84:77:4D:74:50:05:DB:00:82:E1:3A:84:BA:51:44:C7:26:E2:AD:C9:C1:D7:B8",
+        "15:93:B7:9B:64:B0:7E:DA:79:58:AC:DB:01:D9:72:35:2F:68:67:7D:9D:39:22:5B:14:C6:93:25:E5:C8:43:54"
+      ]
+    }
+  }
+]
